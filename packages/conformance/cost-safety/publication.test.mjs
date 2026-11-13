@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { inspectPublicText, isPrivatePublicationPath } from "../../../scripts/publication-audit.mjs";
 
 test("publication: operator files stay private while templates, source rules and notices stay public", () => {
-  for (const file of ["private/docs/notes.md", "artifacts/report.json", "AGENTS.md", "原始点子/chat.md", "configs/cloud/resources.json", "configs/safety.preview.json", ".env.production", "nested/.dev.vars", "secret.pem"]) assert.equal(isPrivatePublicationPath(file), true, file);
+  for (const file of ["private/docs/notes.md", "artifacts/report.json", "AGENTS.md", "原始点子/chat.md", "PUBLICATION.md", "docs/PlayWithAnyone_Implementation_and_Verification_Plan_v1.0.md", "docs/PlayWithAnyone_Cost_and_Safety_Addendum_v1.0.md", "configs/cloud/resources.json", "configs/safety.preview.json", ".env.production", "nested/.dev.vars", "secret.pem"]) assert.equal(isPrivatePublicationPath(file), true, file);
   for (const file of ["configs/cloud/resources.example.json", "configs/safety.preview.example.json", ".env.example", ".dev.vars.example", "games/connect-four/src/rules.ts", "games/connect-four/LICENSE", "scripts/check-public.mjs"]) assert.equal(isPrivatePublicationPath(file), false, file);
 });
 test("publication: credential findings report no secret value", () => {

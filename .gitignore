@@ -29,6 +29,9 @@ artifacts/
 /configs/resource-profiles/connect-four.json
 /docs/PlayWithAnyone_Cost_Operations.md
 /docs/Resource_Profile_Measurement.md
+/PUBLICATION.md
+/docs/PlayWithAnyone_Implementation_and_Verification_Plan_v1.0.md
+/docs/PlayWithAnyone_Cost_and_Safety_Addendum_v1.0.md
 
 # Credential backups and local databases.
 *.pem

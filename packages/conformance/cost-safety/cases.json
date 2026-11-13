@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "source": "docs/PlayWithAnyone_Cost_and_Safety_Addendum_v1.0.md",
+  "source": "docs/OPERATIONS.md",
   "executionStatus": "NOT_EXECUTED_BY_MANIFEST",
-  "scope": "Source mapping only. Actual results belong in artifacts after root remote verification.",
+  "scope": "Coverage map; execution results are produced by test runs.",
   "cases": [
     {
       "id": "COST-01",

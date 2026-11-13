@@ -12,7 +12,7 @@ const value = name => Number(new RegExp(`^# ${name} (\\d+)$`, "m").exec(tap)?.[1
 const total = value("tests"), passed = value("pass"), failed = value("fail"), skipped = value("skipped") + value("todo");
 const sha = content => createHash("sha256").update(content).digest("hex");
 const inputs = {};
-for (const file of ["docs/PlayWithAnyone_Architecture_Spec_v1.2.md", "docs/PlayWithAnyone_Implementation_and_Verification_Plan_v1.0.md", "docs/PlayWithAnyone_Cost_and_Safety_Addendum_v1.0.md", "configs/gameplay.preview.json", "configs/safety.preview.json"]) inputs[file] = sha(await readFile(file));
+for (const file of ["docs/PlayWithAnyone_Architecture_Spec_v1.2.md", "docs/OPERATIONS.md", "configs/gameplay.preview.json", "configs/safety.preview.json"]) inputs[file] = sha(await readFile(file));
 const report = {
   phase: "FIRST_PLAYABLE_PREVIEW", phaseAcceptance: "INCOMPLETE",
   unitStatus: result.status === 0 && total > 0 && passed === total && !skipped ? "PASS" : "FAIL",

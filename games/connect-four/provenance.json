@@ -8,6 +8,5 @@
   "originalMultiplayer": { "transport": "Socket.IO", "evidence": "The source receives room players and authenticated moves, and broadcasts game updates using io.to(roomCode).emit." },
   "adapted": ["gravity placement", "four-direction winner detection"],
   "replaced": ["Socket.IO transport", "upstream room state", "scores and reward policy", "timers and game lifecycle"],
-  "presentation": "Original PlayWithAnyone client using only the platform SDK",
-  "selection": "Approved by user on 2026-11-12; only multiplayer games are eligible for future adaptation."
+  "presentation": "Original PlayWithAnyone client using only the platform SDK"
 }

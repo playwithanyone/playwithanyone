@@ -5,6 +5,8 @@ const privateNames = new Set([
   "configs/safety.entries.json", "configs/safety.watchdog.preview.json",
   "configs/room-routing.preview.json", "configs/resource-profiles/connect-four.json",
   "docs/PlayWithAnyone_Cost_Operations.md", "docs/Resource_Profile_Measurement.md",
+  "PUBLICATION.md", "docs/PlayWithAnyone_Implementation_and_Verification_Plan_v1.0.md",
+  "docs/PlayWithAnyone_Cost_and_Safety_Addendum_v1.0.md",
 ]);
 const privateRoots = /^(?:private|artifacts|node_modules|dist|\.generated|\.build|\.wrangler|原始点子)(?:\/|$)/;
 export function isPrivatePublicationPath(file) {
