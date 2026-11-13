@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "environment": "preview",
+  "accountId": "00000000000000000000000000000000",
+  "configurationVersion": 1,
+  "enabled": false,
+  "productionApproved": false,
+  "notificationVerified": false,
+  "recoveryVerified": false,
+  "externalBlockingVerified": false,
+  "intervalMs": 300000,
+  "maxMetricAgeMs": 3600000,
+  "missingDataStopMs": 3600000,
+  "drainMs": 30000,
+  "maxRunMs": 30000,
+  "maxApiCalls": 16,
+  "requestTimeoutMs": 3000,
+  "notificationRequestTimeoutMs": 20000,
+  "maxResponseBytes": 1048576,
+  "maxLogBytes": 65536,
+  "maxRetries": 1,
+  "notificationRepeatMs": 3600000,
+  "notifications": {
+    "bark": {
+      "enabled": false,
+      "verified": false,
+      "maxAttempts": 2
+    },
+    "email": {
+      "enabled": false,
+      "verified": false,
+      "maxAttempts": 2,
+      "provider": "cloudflare",
+      "accountId": "00000000000000000000000000000000"
+    }
+  },
+  "allowedManagementOrigins": [
+    "https://play.example.test"
+  ],
+  "management": {
+    "stopUrl": "https://play.example.test/api/ops/safety/protect",
+    "verifyUrl": "https://play.example.test/api/ops/safety/status",
+    "recoveryUrl": "https://play.example.test/api/ops/safety/recover"
+  },
+  "metrics": [
+    {
+      "id": "shell-requests",
+      "service": "workers",
+      "kind": "workers-requests",
+      "resource": "playwithanyone",
+      "unit": "requests",
+      "warn": 60000,
+      "stop": 80000,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "do-account-requests",
+      "service": "durable-objects",
+      "kind": "durable-requests",
+      "resource": null,
+      "unit": "requests",
+      "warn": 60000,
+      "stop": 80000,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "d1-project-reads",
+      "service": "d1",
+      "kind": "d1-rows-read",
+      "resource": "00000000-0000-0000-0000-000000000000",
+      "unit": "rows",
+      "warn": 3000000,
+      "stop": 4000000,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "d1-project-writes",
+      "service": "d1",
+      "kind": "d1-rows-written",
+      "resource": "00000000-0000-0000-0000-000000000000",
+      "unit": "rows",
+      "warn": 60000,
+      "stop": 80000,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "r2-public-operations",
+      "service": "r2",
+      "kind": "r2-operations",
+      "resource": "playwithanyone-public-builds",
+      "unit": "requests",
+      "warn": 75000,
+      "stop": 90000,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "r2-private-operations",
+      "service": "r2",
+      "kind": "r2-operations",
+      "resource": "playwithanyone-private-storage",
+      "unit": "requests",
+      "warn": 75000,
+      "stop": 90000,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "r2-public-bytes",
+      "service": "r2",
+      "kind": "r2-stored-bytes",
+      "resource": "playwithanyone-public-builds",
+      "unit": "bytes",
+      "warn": 12582912,
+      "stop": 15728640,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "r2-private-bytes",
+      "service": "r2",
+      "kind": "r2-stored-bytes",
+      "resource": "playwithanyone-private-storage",
+      "unit": "bytes",
+      "warn": 12582912,
+      "stop": 15728640,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    },
+    {
+      "id": "r2-pending-uploads",
+      "service": "r2",
+      "kind": "r2-pending-uploads",
+      "resource": "playwithanyone-public-builds",
+      "unit": "count",
+      "warn": 1,
+      "stop": 2,
+      "maxPerSecond": null,
+      "coverageEvidence": null,
+      "verifiedMaximumLagMs": null
+    }
+  ]
+}

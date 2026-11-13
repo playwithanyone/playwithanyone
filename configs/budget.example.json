@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "currency": "USD",
+  "period": "calendar-month",
+  "currentAuthorizedMonthlyUsd": null,
+  "toleranceCeilingUsd": null,
+  "toleranceCeilingIsSpendingAuthorization": false,
+  "paidPlanEnabledByThisChange": false,
+  "notifyBeforeIncreasingCurrentBudget": true,
+  "requiresApprovalAboveCurrentBudget": true,
+  "scope": "Template only: set an explicitly approved budget in the ignored local file before enabling paid services."
+}

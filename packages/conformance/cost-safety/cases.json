@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "source": "docs/PlayWithAnyone_Cost_and_Safety_Addendum_v1.0.md",
+  "executionStatus": "NOT_EXECUTED_BY_MANIFEST",
+  "scope": "Source mapping only. Actual results belong in artifacts after root remote verification.",
+  "cases": [
+    {
+      "id": "COST-01",
+      "scenario": "缺少收费配置时拒绝开放",
+      "implementedScope": "L0",
+      "evidenceSources": [
+        "limits.test.ts: production policy and disabled TURN"
+      ],
+      "remainingBoundary": "Actual paid activation remains blocked by unspecified production config"
+    },
+    {
+      "id": "COST-02",
+      "scenario": "最后容量竞争和重试幂等，同业务事务",
+      "implementedScope": "L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: final capacity/rollback"
+      ],
+      "remainingBoundary": "Real Cloudflare competing requests checked separately by gameplay acceptance"
+    },
+    {
+      "id": "COST-03",
+      "scenario": "池份额合计、未知/复制池拒绝",
+      "implementedScope": "L0_L1",
+      "evidenceSources": [
+        "limits.test.ts: copied pool quota"
+      ],
+      "remainingBoundary": "Cross-environment account inventory is not a distributed global budget"
+    },
+    {
+      "id": "COST-04",
+      "scenario": "轮换房间不清日/周期累计",
+      "implementedScope": "L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: rotating rooms"
+      ],
+      "remainingBoundary": "Application counters, not official billed usage"
+    },
+    {
+      "id": "COST-05",
+      "scenario": "SQLite重建保留计数与保护锁",
+      "implementedScope": "L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: reconstruction"
+      ],
+      "remainingBoundary": "Provider hibernation/redeploy is a separate L3 check"
+    },
+    {
+      "id": "COST-06",
+      "scenario": "活动额度到期与重连不能延长",
+      "implementedScope": "L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: finite activity allowance"
+      ],
+      "remainingBoundary": "High-frequency relay is disabled; no actual relay run claimed"
+    },
+    {
+      "id": "COST-07",
+      "scenario": "P2P后无多余高频转发/保活",
+      "implementedScope": "NOT_APPLICABLE_DISABLED",
+      "evidenceSources": [],
+      "remainingBoundary": "P2P/TURN disabled for server-turn preview"
+    },
+    {
+      "id": "COST-08",
+      "scenario": "消息大小/速率/累计/扇出/队列边界",
+      "implementedScope": "L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: room messages"
+      ],
+      "remainingBoundary": "Actual websocket hooks checked in gameplay integration"
+    },
+    {
+      "id": "COST-09",
+      "scenario": "读取行数来自实际meta而非返回数量",
+      "implementedScope": "L1_SQLITE_COMPONENT",
+      "evidenceSources": [
+        "d1.test.ts: atomic native batch pre-debit, SQL abort, indexed query plan, known/unknown metadata, fixed-scope daily latch",
+        "limits.test.ts: actual usage field validation"
+      ],
+      "remainingBoundary": "Cloudflare actual rows_read/rows_written checked separately by real workerd/cloud HTTP acceptance; SQLite metadata fixture is not provider billing"
+    },
+    {
+      "id": "COST-10",
+      "scenario": "R2发布/读取计数与资源边界",
+      "implementedScope": "L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: R2 pre-debit/publication"
+      ],
+      "remainingBoundary": "Root release journal and actual cached public routes need integration checks"
+    },
+    {
+      "id": "COST-11",
+      "scenario": "TURN签发续期撤销",
+      "implementedScope": "NOT_APPLICABLE_DISABLED",
+      "evidenceSources": [
+        "limits.test.ts: disabled paid service",
+        "watchdog.test.mjs: no pretend TURN metrics"
+      ],
+      "remainingBoundary": "Actual TURN revocation NOT_RUN, service disabled"
+    },
+    {
+      "id": "COST-12",
+      "scenario": "指标失败未知、过期保护、增长阈值",
+      "implementedScope": "L0",
+      "evidenceSources": [
+        "watchdog.test.mjs: missing/stale/growth/collector failures"
+      ],
+      "remainingBoundary": "Actual account metric permission and completeness NOT_VERIFIED"
+    },
+    {
+      "id": "COST-13",
+      "scenario": "巡检失联可发现",
+      "implementedScope": "PARTIAL_L0_L1",
+      "evidenceSources": [
+        "watchdog.test.mjs: execution/call bounds",
+        "limits.test.ts: finite room deadline"
+      ],
+      "remainingBoundary": "Independent scheduler/heartbeat alert NOT_DEPLOYED"
+    },
+    {
+      "id": "COST-14",
+      "scenario": "入口WAF不能替代旧WS主动停止",
+      "implementedScope": "NOT_RUN_EXTERNAL_WAF",
+      "evidenceSources": [
+        "operations.ts runStopActions observer interface"
+      ],
+      "remainingBoundary": "Gameplay Room stop implemented separately; actual WAF drill NOT_RUN"
+    },
+    {
+      "id": "COST-15",
+      "scenario": "停止后台和Alarm，有界收尾",
+      "implementedScope": "PARTIAL_L0_L1",
+      "evidenceSources": [
+        "limits.test.ts: cleanup bounds and stop failures"
+      ],
+      "remainingBoundary": "Actual runtime task stop/alarm integration checked separately"
+    },
+    {
+      "id": "COST-16",
+      "scenario": "旧通知/旧配置/跨周期不解锁",
+      "implementedScope": "L0_L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: protection lock/version",
+        "watchdog.test.mjs: cumulative windows/latch",
+        "d1.test.ts: durable DB lock/recovery, stale stop replay"
+      ],
+      "remainingBoundary": "No automatic recovery"
+    },
+    {
+      "id": "COST-17",
+      "scenario": "DB失败和独立停止动作失败仍继续",
+      "implementedScope": "L0",
+      "evidenceSources": [
+        "limits.test.ts: independent stop actions"
+      ],
+      "remainingBoundary": "Provider fault injection checked separately"
+    },
+    {
+      "id": "COST-18",
+      "scenario": "备用入口/管理误封可检出",
+      "implementedScope": "L0_COMPONENT",
+      "evidenceSources": [
+        "limits.test.ts: inventory and management auth"
+      ],
+      "remainingBoundary": "Real WAF coverage NOT_VERIFIED; entries inventory is deployment input"
+    },
+    {
+      "id": "COST-19",
+      "scenario": "通知失败不阻止停止且有限重试",
+      "implementedScope": "L0",
+      "evidenceSources": [
+        "limits.test.ts: notification stop failure",
+        "watchdog.test.mjs: notification sanitization/dedupe"
+      ],
+      "remainingBoundary": "Actual notification delivery NOT_RUN, receiver unspecified"
+    },
+    {
+      "id": "COST-20",
+      "scenario": "认证人工恢复与审计",
+      "implementedScope": "L0_L1_COMPONENT",
+      "evidenceSources": [
+        "limits.test.ts: manual recovery and independent credentials",
+        "watchdog.test.mjs: observed server recovery required",
+        "d1.test.ts: durable DB lock/recovery, stale stop replay"
+      ],
+      "remainingBoundary": "Real cloud secrets not set by this module"
+    },
+    {
+      "id": "COST-21",
+      "scenario": "官方阻断配置与真实效果区分",
+      "implementedScope": "NOT_RUN_PROVIDER_BLOCK",
+      "evidenceSources": [
+        "watchdog.test.mjs: unavailable adapter/config does not claim protection"
+      ],
+      "remainingBoundary": "Spend Policy account availability and blocking NOT_VERIFIED"
+    },
+    {
+      "id": "COST-22",
+      "scenario": "停止不删除业务数据",
+      "implementedScope": "L1_SQLITE",
+      "evidenceSources": [
+        "limits.test.ts: retained business rows"
+      ],
+      "remainingBoundary": "No deletion operation in stop module; actual R2 before/after drill separate"
+    }
+  ]
+}

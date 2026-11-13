@@ -1,0 +1,7 @@
+{
+  "name": "@playwithanyone/release",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Immutable game package identities and publication validation."
+}

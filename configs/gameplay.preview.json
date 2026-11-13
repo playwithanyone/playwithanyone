@@ -1,0 +1,14 @@
+{
+  "policyId": "connect-four-first-playable",
+  "version": 2,
+  "values": {
+    "guestAllowed": true,
+    "startCondition": "BOTH_PREPARED",
+    "queueWaitMs": 30000,
+    "disconnectGraceMs": 60000,
+    "disconnectOutcome": "ABORT_NO_RESULT",
+    "executionClass": "hibernated-turn",
+    "turnTimeoutMs": 90000,
+    "maxRoomLifetimeMs": 1800000
+  }
+}

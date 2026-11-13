@@ -1,0 +1,7 @@
+{
+  "name": "@playwithanyone/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Credential-free browser game SDK and trusted presentation bridge."
+}

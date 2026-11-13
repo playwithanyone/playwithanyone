@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "host": "your-ssh-host",
+  "directory": "/absolute/path/to/playwithanyone"
+}

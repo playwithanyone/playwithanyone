@@ -1,0 +1,7 @@
+{
+  "policyId": "pwa-cost-safety",
+  "version": 1,
+  "values": {
+    "environment": "production"
+  }
+}

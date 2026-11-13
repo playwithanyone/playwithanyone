@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "environment": "preview",
+  "accountId": "00000000000000000000000000000000",
+  "zoneId": "00000000000000000000000000000000",
+  "shellOrigin": "https://play.example.test",
+  "workerSubdomain": "your-subdomain.workers.dev",
+  "assetOrigin": "https://playwithanyone-assets.your-subdomain.workers.dev",
+  "shellWorkerName": "playwithanyone",
+  "assetWorkerName": "playwithanyone-assets",
+  "databaseName": "playwithanyone-preview",
+  "databaseId": "00000000-0000-0000-0000-000000000000",
+  "publicBucket": "playwithanyone-public-builds",
+  "privateBucket": "playwithanyone-private-storage",
+  "sessionTtlSeconds": 3600,
+  "storageClass": "Standard",
+  "registeredBuilds": [],
+  "activeGameId": "connect-four"
+}

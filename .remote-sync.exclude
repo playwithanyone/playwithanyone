@@ -1,0 +1,24 @@
+# Source, tests, specifications, scripts and lockfiles are included by default.
+# Remote dependencies and generated results are retained, never sent from local.
+/.git/
+node_modules/
+dist/
+/.generated/
+/.build/
+/.wrangler/
+/artifacts/
+/.DS_Store
+*.log
+/.env
+/.env.local
+/.env.production
+/.env.*
+/.dev.vars
+/.dev.vars.*
+# Historical idea exports are not build or conformance inputs.
+/原始点子/
+/private/
+/configs/remote.local.json
+/configs/budget.authorized.json
+/docs/PlayWithAnyone_Cost_Operations.md
+/docs/Resource_Profile_Measurement.md

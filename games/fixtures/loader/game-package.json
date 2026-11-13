@@ -1,0 +1,15 @@
+{
+  "formatVersion": 1,
+  "gameId": "fixture-loader",
+  "sdk": { "min": 1, "max": 1 },
+  "protocol": { "min": 1, "max": 1 },
+  "profile": { "id": "server-turn", "version": 1 },
+  "rules": { "id": "fixture-loader-no-gameplay", "version": 1 },
+  "schemas": { "command": null, "input": null, "publicState": "fixture-loader-state-v1", "privateState": "fixture-private-marker-v1" },
+  "codecs": { "command": null, "input": null, "state": { "id": "fixture-json", "version": 1 } },
+  "entries": { "client": "client/index.html", "publicSimulation": null, "serverPrivate": "server-private/marker.js" },
+  "browserCapabilities": [],
+  "budgets": { "peakInputRateHz": 0, "stateRateHz": 0, "maxFrameBytes": 16384, "historyBytes": 4096, "rollbackWindowTicks": 0, "maxStepCpuMs": 10, "maxMemoryBytes": 16777216, "maxQueuedBytes": 16384, "maxBulkBytes": 65536, "maxConcurrentBulk": 1 },
+  "recovery": { "checkpoints": false, "commandLog": false, "inputHistory": false, "spectating": false, "midMatchJoin": false },
+  "requiredAssets": ["client/main.js", "client/style.css", "assets/sample.json"]
+}

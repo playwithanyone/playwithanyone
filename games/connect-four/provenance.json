@@ -1,0 +1,13 @@
+{
+  "gameId": "connect-four",
+  "upstream": "https://github.com/assishmoncs/battlebox",
+  "commit": "072659ace68261e05ce0d7b8f3d4e2fc2c9970a7",
+  "sourcePath": "games/connectfour.js",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 BattleBox Contributors",
+  "originalMultiplayer": { "transport": "Socket.IO", "evidence": "The source receives room players and authenticated moves, and broadcasts game updates using io.to(roomCode).emit." },
+  "adapted": ["gravity placement", "four-direction winner detection"],
+  "replaced": ["Socket.IO transport", "upstream room state", "scores and reward policy", "timers and game lifecycle"],
+  "presentation": "Original PlayWithAnyone client using only the platform SDK",
+  "selection": "Approved by user on 2026-11-12; only multiplayer games are eligible for future adaptation."
+}

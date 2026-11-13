@@ -1,0 +1,11 @@
+{
+  "shellOrigin": "https://play.example.com",
+  "gameDomain": "your-subdomain.workers.dev",
+  "assetOrigin": null,
+  "cloudflareAccountId": "REPLACE_WITH_YOUR_CLOUDFLARE_ACCOUNT_ID",
+  "d1DatabaseId": null,
+  "publicBuildBucket": null,
+  "privateStorageBucket": null,
+  "sessionTtlSeconds": null,
+  "productionPolicies": null
+}

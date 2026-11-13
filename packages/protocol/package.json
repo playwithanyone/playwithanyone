@@ -1,0 +1,7 @@
+{
+  "name": "@playwithanyone/protocol",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform wire protocol and pure reliability primitives."
+}

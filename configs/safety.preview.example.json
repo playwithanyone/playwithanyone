@@ -1,0 +1,109 @@
+{
+  "policyId": "pwa-cost-safety",
+  "version": 1,
+  "values": {
+    "environment": "preview",
+    "mode": "free-preview",
+    "accountId": "00000000000000000000000000000000",
+    "cycle": {
+      "id": "preview-2026-11",
+      "startsAt": 1793491200000,
+      "endsAt": 1796083200000
+    },
+    "services": {
+      "workers": "Free",
+      "durableObjects": "Free",
+      "d1": "Free",
+      "r2": "Standard-existing",
+      "turn": "disabled",
+      "simulation": "disabled"
+    },
+    "global": {
+      "maxActiveRooms": 32,
+      "maxCreatesPerMinute": 24,
+      "maxCreatesPerDay": 128,
+      "maxCreatesPerCycle": 3840,
+      "maxActivityMsPerDay": 0,
+      "maxActivityMsPerCycle": 0
+    },
+    "pools": [
+      {
+        "poolId": "connect-four:casual:global",
+        "accountingKey": "connect-four-v1",
+        "legacyPoolIds": [
+          "connect-four-v1"
+        ],
+        "executionClass": "hibernated-turn",
+        "enabled": true,
+        "maxActiveRooms": 32,
+        "maxCreatesPerMinute": 24,
+        "maxCreatesPerDay": 128,
+        "maxCreatesPerCycle": 3840,
+        "maxActivityMsPerDay": 0,
+        "maxActivityMsPerCycle": 0
+      }
+    ],
+    "room": {
+      "maxMessageBytes": 16384,
+      "messagesPerSecond": 24,
+      "maxTotalMessages": 10000,
+      "maxBroadcastFanout": 4,
+      "maxQueuedBytes": 131072,
+      "maxLifetimeMs": 1800000,
+      "protectionMaxAgeMs": 3600000,
+      "closeGraceMs": 3000,
+      "maxCleanupOperations": 12
+    },
+    "data": {
+      "maxD1RowsReadPerOperation": 512,
+      "maxD1RowsWrittenPerOperation": 8,
+      "maxD1RowsReadPerDay": 500000,
+      "maxD1RowsWrittenPerDay": 30000,
+      "maxR2ObjectBytes": 2097152,
+      "maxR2ObjectsPerPublication": 64,
+      "maxR2BytesPerPublication": 5242880,
+      "maxR2WritesPerCycle": 128,
+      "maxR2ReadsPerCycle": 100000,
+      "maxR2StoredBytes": 16777216,
+      "maxLogBytesPerRun": 65536,
+      "maxRetries": 2
+    },
+    "watchdog": null,
+    "paid": null,
+    "executionClasses": [
+      {
+        "executionClass": "hibernated-turn",
+        "enabled": true,
+        "maxRoomLifetimeMs": 1800000,
+        "maxActiveRooms": 32,
+        "maxCreatesPerMinute": 24,
+        "maxCreatesPerDay": 128,
+        "maxCreatesPerCycle": 3840,
+        "maxActivityMsPerDay": 0,
+        "maxActivityMsPerCycle": 0
+      },
+      {
+        "executionClass": "p2p-signaling",
+        "enabled": false,
+        "maxRoomLifetimeMs": 0,
+        "maxActiveRooms": 0,
+        "maxCreatesPerMinute": 0,
+        "maxCreatesPerDay": 0,
+        "maxCreatesPerCycle": 0,
+        "maxActivityMsPerDay": 0,
+        "maxActivityMsPerCycle": 0
+      },
+      {
+        "executionClass": "realtime-tick",
+        "enabled": false,
+        "maxRoomLifetimeMs": 0,
+        "maxActiveRooms": 0,
+        "maxCreatesPerMinute": 0,
+        "maxCreatesPerDay": 0,
+        "maxCreatesPerCycle": 0,
+        "maxActivityMsPerDay": 0,
+        "maxActivityMsPerCycle": 0
+      }
+    ]
+  }
+}

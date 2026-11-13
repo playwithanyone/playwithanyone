@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "environment": "preview",
+  "allowedWebSocketOrigins": [
+    "wss://play.example.test"
+  ],
+  "defaultRegionHint": "global",
+  "regionHints": [
+    "global"
+  ],
+  "executionClasses": {
+    "hibernated-turn": {
+      "enabled": true,
+      "host": "durable-object"
+    },
+    "p2p-signaling": {
+      "enabled": false,
+      "host": "durable-object"
+    },
+    "realtime-tick": {
+      "enabled": false,
+      "host": "vps"
+    }
+  },
+  "games": [
+    {
+      "gameId": "connect-four",
+      "releaseHash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "executionClass": "hibernated-turn",
+      "mode": "casual",
+      "regionHint": "global",
+      "wsOrigin": "wss://play.example.test",
+      "wsPathTemplate": "/api/play/rooms/{roomId}/socket",
+      "syncPolicy": {
+        "profileId": "server-turn",
+        "profileVersion": 1,
+        "protocolVersions": [
+          1
+        ]
+      },
+      "legacyPhysicalOwner": "connect-four-v1"
+    },
+    {
+      "gameId": "connect-four",
+      "releaseHash": "1111111111111111111111111111111111111111111111111111111111111111",
+      "executionClass": "hibernated-turn",
+      "mode": "casual",
+      "regionHint": "global",
+      "wsOrigin": "wss://play.example.test",
+      "wsPathTemplate": "/api/play/rooms/{roomId}/socket",
+      "syncPolicy": {
+        "profileId": "server-turn",
+        "profileVersion": 1,
+        "protocolVersions": [
+          1
+        ]
+      },
+      "legacyPhysicalOwner": "connect-four-v1"
+    }
+  ]
+}

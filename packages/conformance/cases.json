@@ -1,0 +1,470 @@
+{
+  "schemaVersion": 1,
+  "architectureVersion": "1.2",
+  "architectureSha256": "1a192e1fd4b988b554001c4f0cd567cc1b4bf588176f5bc2e0458ffdaf773183",
+  "planVersion": "1.0",
+  "cases": [
+    {
+      "id": "V1",
+      "sourceSection": "9.8",
+      "description": "完整字节、解码字段和重新编码均与规范一致",
+      "followUp": "P1 L0；P3/P4 实际 WS/RTC 使用同一 codec",
+      "p1L0": true
+    },
+    {
+      "id": "V2",
+      "sourceSection": "9.8",
+      "description": "完整字节、firstTick、count、inputBytes 和末 tick 一致",
+      "followUp": "P1 L0；P4 验证实际输入收发",
+      "p1L0": true
+    },
+    {
+      "id": "V3",
+      "sourceSection": "9.8",
+      "description": "完整字节一致；103/104 缺口未补齐时不得推进连续确认位置",
+      "followUp": "P1 L0；P4 验证实际输入确认；该样例独立于 V2 的状态",
+      "p1L0": true
+    },
+    {
+      "id": "N99-01",
+      "sourceSection": "9.9",
+      "description": "payloadBytes 与实际长度不符；拒绝整帧；不越界读取，不改变确认位置",
+      "followUp": "P1 L0；后续组件复测",
+      "p1L0": true
+    },
+    {
+      "id": "N99-02",
+      "sourceSection": "9.9",
+      "description": "INPUT_BATCH 的 count、长度或末 tick 不一致；拒绝整批，不生成接收确认",
+      "followUp": "P1 L0；P4 实际输入接收复测",
+      "p1L0": true
+    },
+    {
+      "id": "N99-03",
+      "sourceSection": "9.9",
+      "description": "未绑定或已失效的权威、席位、会话上下文，包括撤销、过期或代次不符；拒绝数据，不更新其他上下文",
+      "followUp": "P1 L0；P3 L1 实际授权；P4 L2 实际 RTC",
+      "p1L0": true
+    },
+    {
+      "id": "N99-04",
+      "sourceSection": "9.9",
+      "description": "同 contextTag 对应不同 descriptor；拒绝冲突，不覆盖原绑定",
+      "followUp": "P1 L0；P3 L1；P4 L2 两端与中继",
+      "p1L0": true
+    },
+    {
+      "id": "N99-05",
+      "sourceSection": "9.9",
+      "description": "同一命令经 WS 和 RTC 到达；规则只执行一次，返回稳定结果",
+      "followUp": "P1 L0 模型；P4 L2 实际双路径",
+      "p1L0": true
+    },
+    {
+      "id": "N99-06",
+      "sourceSection": "9.9",
+      "description": "WS 的 seq100 晚于 RTC 的 seq101..166；保留 seq100 缺口，不因超过 64 位窗口而丢弃",
+      "followUp": "P1 L0；P4 L2 实际通道与受控乱序",
+      "p1L0": true
+    },
+    {
+      "id": "N99-07",
+      "sourceSection": "9.9",
+      "description": "连续丢包超过单包冗余能覆盖的范围；从历史补齐；历史不足时进入明确恢复处理",
+      "followUp": "P1 L0；P4 L2；P6 L3 网络采样",
+      "p1L0": true
+    },
+    {
+      "id": "N99-08",
+      "sourceSection": "9.9",
+      "description": "已收到 105，仍缺 103/104；nextExpected 保持 103，不释放所需历史",
+      "followUp": "P1 L0；P4 L2",
+      "p1L0": true
+    },
+    {
+      "id": "N99-09",
+      "sourceSection": "9.9",
+      "description": "新记录将覆盖未确认环形槽位；返回背压或历史耗尽，原记录不变；上层处理该结果",
+      "followUp": "P1 L0；P4 L2",
+      "p1L0": true
+    },
+    {
+      "id": "N99-10",
+      "sourceSection": "9.9",
+      "description": "同 tick 收到不同输入内容；返回 INPUT_CONFLICT，保留原输入",
+      "followUp": "P1 L0；P4 实际规则接收复测",
+      "p1L0": true
+    },
+    {
+      "id": "N99-11",
+      "sourceSection": "9.9",
+      "description": "fast 通道已开，reliable 的 PATH_READY 迟到；接收器未确认就绪前不发送业务数据",
+      "followUp": "P1 L0；P4 L2 两条实际 DataChannel",
+      "p1L0": true
+    },
+    {
+      "id": "N99-12",
+      "sourceSection": "9.9",
+      "description": "更换宿主后重发未确认命令；保持命令身份；已处理则返回原结果，确认未处理则校验并处理一次，无法确定结果则报错",
+      "followUp": "P1 L0；P5 L1/L2；P6 L3 重启检查",
+      "p1L0": true
+    },
+    {
+      "id": "N99-13",
+      "sourceSection": "9.9",
+      "description": "序号达到上界；不回绕，返回 SEQ_EXHAUSTED；新流必须取得授权",
+      "followUp": "P1 L0；P3/P5 验证授权入口",
+      "p1L0": true
+    },
+    {
+      "id": "N99-14",
+      "sourceSection": "9.9",
+      "description": "旧 clockDomain、非有限数值或未知 probe；拒绝样本，不改变有效时钟估计",
+      "followUp": "P1 L0；P4 L2 时钟域变更",
+      "p1L0": true
+    },
+    {
+      "id": "N99-15",
+      "sourceSection": "9.9",
+      "description": "必须补齐的缺口超出历史或恢复预算；上层进入恢复或明确不可恢复；不生成虚假 ACK，不由传输层判胜负",
+      "followUp": "P1 L0；P4/P5 L2",
+      "p1L0": true
+    },
+    {
+      "id": "M01",
+      "sourceSection": "16.1",
+      "description": "并发匹配选择重叠意图；每份意图只被原子消费一次",
+      "followUp": "P3 L1 实际 SQLite 事务；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "M02",
+      "sourceSection": "16.1",
+      "description": "成局回复丢失后重试；取得原 Assignment，不新建重复分配",
+      "followUp": "P3 L1 实际请求与回复丢失；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "M03",
+      "sourceSection": "16.1",
+      "description": "跨池转移各持久点崩溃；恢复后仅一个最终分配所有者",
+      "followUp": "P5 L1 双方重启与恢复；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "M04",
+      "sourceSection": "16.1",
+      "description": "取消与转移消息重复、乱序；按持久决议产生唯一结果",
+      "followUp": "P5 L1 实际内部决议查询与 outbox；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "M05",
+      "sourceSection": "16.1",
+      "description": "CLOSE_ASSIGNMENT 先于 INSTALL 到达；关闭记录阻止 Match 复活",
+      "followUp": "P3 L1 实际消息与持久关闭记录；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "A01",
+      "sourceSection": "16.1",
+      "description": "A 的已认证连接发送 B 席位的流；拒绝且不转发，不改变 B 的确认位置",
+      "followUp": "P3 L1/L2 实际认证 socket",
+      "p1L0": false
+    },
+    {
+      "id": "A02",
+      "sourceSection": "16.1",
+      "description": "相同 matchId 但 DTLS 指纹未经平台认可；RTC 绑定失败",
+      "followUp": "P4 L2 实际 RTC、DTLS 与信令；正确 nonce 也不能放行",
+      "p1L0": false
+    },
+    {
+      "id": "A03",
+      "sourceSection": "16.1",
+      "description": "页面实例改变后旧端口继续发送；旧实例不能进入当前输入流",
+      "followUp": "P2 L2 撤销端口；P3/P4 L2 实际输入调用链",
+      "p1L0": false
+    },
+    {
+      "id": "A04",
+      "sourceSection": "16.1",
+      "description": "新输入会话获准接管，旧 peer 尚未撤权；等待必要隔离或旧授权到期",
+      "followUp": "P3 L1 授权与接收逻辑；P4 L2 旧 peer 失联与授权到期",
+      "p1L0": false
+    },
+    {
+      "id": "T01",
+      "sourceSection": "16.1",
+      "description": "同命令经 WS/RTC 双发；一个规则应用和稳定结果，两路可确认接收",
+      "followUp": "P4 L2 实际双路径与规则执行记录",
+      "p1L0": false
+    },
+    {
+      "id": "T02",
+      "sourceSection": "16.1",
+      "description": "WS seq100 晚于 RTC seq101..166；缺口持续保留",
+      "followUp": "P4 L2 实际连接与受控乱序",
+      "p1L0": false
+    },
+    {
+      "id": "T03",
+      "sourceSection": "16.1",
+      "description": "输入缺口超过单包冗余；有历史则补齐，无历史则明确恢复",
+      "followUp": "P4 L2 两个分支；P6 L3 网络采样",
+      "p1L0": false
+    },
+    {
+      "id": "T04",
+      "sourceSection": "16.1",
+      "description": "fast 已开而 reliable READY 延迟；未就绪前不发送业务",
+      "followUp": "P4 L2 两条实际 DataChannel",
+      "p1L0": false
+    },
+    {
+      "id": "T05",
+      "sourceSection": "16.1",
+      "description": "控制 DO 不写路由 COMMIT；双方仍能切换并补齐，成员和权威不变",
+      "followUp": "P4 L1/L2 实际连接与存储写入记录",
+      "p1L0": false
+    },
+    {
+      "id": "T06",
+      "sourceSection": "16.1",
+      "description": "未确认槽位将被覆盖；保留旧记录并报告背压或历史耗尽",
+      "followUp": "P1 L0 缓冲模块；P4 L2 上层处理",
+      "p1L0": true
+    },
+    {
+      "id": "T07",
+      "sourceSection": "16.1",
+      "description": "同接收上下文的 ACK nextExpected=106 后，旧 GAP_REQUEST [103,105) 才到",
+      "followUp": "P1 L0、P4 L2；忽略已连续确认区间，不触发虚假历史丢失",
+      "p1L0": true
+    },
+    {
+      "id": "T08",
+      "sourceSection": "16.1",
+      "description": "已 ACK 到 1001 的接收端崩溃，只恢复到 tick900",
+      "followUp": "P4 L1/L2 实例重建与真实恢复；从真实位置补齐，历史不足则明确失败",
+      "p1L0": false
+    },
+    {
+      "id": "R01",
+      "sourceSection": "16.1",
+      "description": "权威迁移后重发旧权威已提交命令；保持身份并返回原结果",
+      "followUp": "P5 L1/L2 实际授权、迁移和提交结果查询",
+      "p1L0": false
+    },
+    {
+      "id": "R02",
+      "sourceSection": "16.1",
+      "description": "检查点后缺少已 COMMITTED 命令日志；拒绝完整恢复",
+      "followUp": "P5 L1 实际检查点/日志缺失；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "R03",
+      "sourceSection": "16.1",
+      "description": "回滚十帧重演相同音效和奖励；效果按稳定身份确认/撤销，永久奖励不重复",
+      "followUp": "P4 L0 重演；L1 实际副作用记录；L2 画面和音效",
+      "p1L0": false
+    },
+    {
+      "id": "R04",
+      "sourceSection": "16.1",
+      "description": "新权威增量引用与旧权威同号 baseSeq；只使用当前权威认可的对应完整状态",
+      "followUp": "P5 L1/L2 实际权威变化与缓存检查",
+      "p1L0": false
+    },
+    {
+      "id": "D01",
+      "sourceSection": "16.1",
+      "description": "同结果 outbox 投递十次；结果和统计增量各一次，摘要冲突可见",
+      "followUp": "P3 L1 实际 D1 接口；P6 L3 实际 D1",
+      "p1L0": false
+    },
+    {
+      "id": "D02",
+      "sourceSection": "16.1",
+      "description": "D1 批量事务任一必需写入失败；整批回滚，按原标识重试",
+      "followUp": "P3 L1 故障注入；P6 L3 实际 D1 batch",
+      "p1L0": false
+    },
+    {
+      "id": "P01",
+      "sourceSection": "16.1",
+      "description": "发布或模式缺少所需产品策略；入口报告缺项，不自行设默认",
+      "followUp": "P1 L0 解析器；P3 L1 实际入口；P6 L2 完整调用链",
+      "p1L0": true
+    },
+    {
+      "id": "P02",
+      "sourceSection": "16.1",
+      "description": "无 Tick 池时 server-turn/rollback 可运行；server-snapshot 缺必要承载时拒绝",
+      "followUp": "P3 turn、P4 rollback、P5 snapshot 依赖检查；P6 L3；全部子测试完成后汇总",
+      "p1L0": false
+    },
+    {
+      "id": "V01",
+      "sourceSection": "16.1",
+      "description": "对局中发布新构建；原局仍使用旧构建和规则",
+      "followUp": "P3 L1/L2 实际运行与发布；P6 L3 资源缓存与旧版本访问",
+      "p1L0": false
+    },
+    {
+      "id": "C01",
+      "sourceSection": "16.1",
+      "description": "控制面不可达且控制授权到期；不接受新的权威变更，不创建独立续玩身份或正式结果",
+      "followUp": "P4 L1/L2 实际断控制连接与授权到期；P6 L3；分别处理入场令牌与活动授权有效期",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-01",
+      "sourceSection": "11.8",
+      "description": "真实 Godot/WASM 导出通过规定资源路线加载",
+      "followUp": "P2 L2 实际产物；P6 L3 实际域名与响应头",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-02",
+      "sourceSection": "11.8",
+      "description": "所需资源加载违反规定；请求失败且不能报告 READY",
+      "followUp": "P2 L2 实际请求；P6 L3；不得自动放宽 CSP",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-03",
+      "sourceSection": "11.8",
+      "description": "游戏尝试通过 fetch、WS、img 越过允许资源范围",
+      "followUp": "P2 L2 分别验证各路径受限；P6 L3 检查部署头",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-04",
+      "sourceSection": "11.8",
+      "description": "普通 Worker 尝试越界连接",
+      "followUp": "P2 L2 实际 Worker 及其响应策略；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-05",
+      "sourceSection": "11.8",
+      "description": "声明线程能力的真实导出初始化线程、SAB 和 Atomics",
+      "followUp": "P2 L2；P6 L3 声明设备；不跨不允许的 agent cluster 共享内存",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-06",
+      "sourceSection": "11.8",
+      "description": "分别破坏必要响应头、权限委派或资源条件",
+      "followUp": "P2 L2、P6 L3；明确失败，不降低安全要求继续报告可用",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-07",
+      "sourceSection": "11.8",
+      "description": "通过 MessagePort 转移 ArrayBuffer",
+      "followUp": "P2 L2；确认所有权转移，不复用已 detached 的缓冲",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-08",
+      "sourceSection": "11.8",
+      "description": "主站与游戏尝试读取 HttpOnly 会话值",
+      "followUp": "P2 L2 实际 Cookie/DOM；P6 L3 隔离域；不把游戏自有 Cookie 当平台凭据",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-09",
+      "sourceSection": "11.8",
+      "description": "跨源请求、会话或连接来源不满足要求",
+      "followUp": "P2 L1/L2 实际 API/会话；P3 完整 Room/WS；P6 L3",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-10",
+      "sourceSection": "11.8",
+      "description": "不同 iframe、错误 source/origin/nonce 参与握手",
+      "followUp": "P2 L2；全部绑定条件正确才授予端口",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-11",
+      "sourceSection": "11.8",
+      "description": "会话、呈现绑定、席位或局的权限已撤销",
+      "followUp": "P2 实际会话撤销；P3 换局/席位；P4 RTC；旧权限不能继续输入",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-12",
+      "sourceSection": "11.8",
+      "description": "iframe 导航、重载或实例替换",
+      "followUp": "P2 L2 实际浏览器；P3 输入调用链复测；旧端口失效",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-13",
+      "sourceSection": "11.8",
+      "description": "游戏提交不允许的方法、载荷、主体、角色或任期",
+      "followUp": "P3 L1/L2 实际服务端检查；P4 RTC；桥与服务端均校验",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-14",
+      "sourceSection": "11.8",
+      "description": "有效 TURN 凭证但没有游戏权限",
+      "followUp": "P4 L2/L3；TURN 可达但应用数据被拒绝",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-15",
+      "sourceSection": "11.8",
+      "description": "启用 relay-only",
+      "followUp": "P4 L2/L3 检查实际选中路径；P6 网络测试；不静默改为直连",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-16",
+      "sourceSection": "11.8",
+      "description": "访问私有 R2 对象或通过公开缓存读取私有响应",
+      "followUp": "P3/P6 L3 实际桶绑定、路由和缓存访问；不得公开返回",
+      "p1L0": false
+    },
+    {
+      "id": "SEC-17",
+      "sourceSection": "11.8",
+      "description": "声明支持的浏览器执行 CSP webrtc 指令相关测试",
+      "followUp": "P4/P6 L2；有明确不适用依据时记 N/A，不支持不得记 PASS",
+      "p1L0": false
+    },
+    {
+      "id": "DEP-01",
+      "sourceSection": "11.8",
+      "description": "启用 server-snapshot 但无实际运行实例，或声明 WT 却无端点",
+      "followUp": "P3/P5 L1 分配入口；P5/P6 L3 缺依赖部署；明确拒绝",
+      "p1L0": false
+    },
+    {
+      "id": "DEP-02",
+      "sourceSection": "11.8",
+      "description": "DO 实例重启或休眠后恢复",
+      "followUp": "P3 L1 清除内存并读取 SQLite；P3/P6 L3 生命周期；状态与分配不重复",
+      "p1L0": false
+    },
+    {
+      "id": "DEP-03",
+      "sourceSection": "11.8",
+      "description": "目录、结果等异步投影或 outbox 重试、迟到",
+      "followUp": "P3 L1、P6 L3；不改变正式所有权，不重复结果",
+      "p1L0": false
+    },
+    {
+      "id": "DEP-04",
+      "sourceSection": "11.8",
+      "description": "检查各同步模式声明的实际依赖",
+      "followUp": "P2/P3/P5 随组件完成，P6 L3 检查全部署；逐项记录，缺失时拒绝对应能力",
+      "p1L0": false
+    }
+  ]
+}
